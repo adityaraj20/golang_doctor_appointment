@@ -1,0 +1,159 @@
+package userpb
+
+type UserService interface {
+	Register(RegisterRequest) RegisterResponse
+	UserEdit(UserEditRequest) UserEditResponse
+	UserUpdate(UserUpdateRequest) UserUpdateResponse
+	UserDelete(UserDeleteRequest) UserDeleteResponse
+	UserList(UserlistRequest) UserListResponse
+	RegisterAppointment(RegisterAppointmentRequest) RegisterAppointmentResponse
+	EditPatientStatus(EditPatientStatusRequest) EditPatientStatusResponse
+	UpdatePatientStatus(UpdatePatientStatusRequest) UpdatePatientStatusResponse
+	ShowDoctorlistPatient(ShowDoctorlistPatientRequest) ShowDoctorlistPatientResponse
+	AppoinmentStatus(AppoinmentStatusRequest) AppoinmentStatusResponse
+}
+//appontment status
+type AppontmentStatus struct {
+	ID           int    `pb:"1"`
+	FirstName    string `pb:"2"`
+	LastName     string `pb:"3"`
+	Is_Appointed bool   `pb:"4"`
+	TimeSlot     string `pb:"5"`
+}
+//Doctor list Patient struct 
+type DoctorList struct {
+	ID         int    `pb:"1"`
+	FirstName  string `pb:"2"`
+	LastName   string `pb:"3"`
+	Degree     string `pb:"4"`
+	DoctorType string `pb:"5"`
+	Gender     string `pb:"6"`
+} 
+//appointments status request
+type AppoinmentStatusRequest struct{
+	ID int `pb:"1"`
+}
+//appintments status response
+type AppoinmentStatusResponse struct{
+	AppontmentStatus []AppontmentStatus `pb:"1"`
+}
+//register appointment request
+type RegisterAppointmentmentsRequest struct {
+	UserID          int  `pb:"1"`
+	DoctorDetailsID int  `pb:"2"`
+	ScheduleID      int  `pb:"3"`
+	Is_Appointed    bool `pb:"4"`
+}
+//register appointment response
+type RegisterAppointmentmentsResponse struct {
+	ID              int  `pb:"1"`
+	UserID          int  `pb:"2"`
+	DoctorDetailsID int  `pb:"3"`
+	ScheduleID      int  `pb:"4"`
+	Is_Appointed    bool `pb:"5"`
+}
+// show doctor list to patient request
+type ShowDoctorlistPatientRequest struct {
+	id int `pb:"1"`
+}
+//show doctor list to patient response
+type ShowDoctorlistPatientResponse struct {
+	DoctorList []DoctorList `pb:"1"` 
+}
+
+// Register appointment struct
+type Appointment struct {
+	ID              int  `pb:"1"`
+	UserID          int  `pb:"2"`
+	DoctorDetailsID int  `pb:"3"`
+	ScheduleID      int  `pb:"4"`
+	Is_Appointed    bool `pb:"5"`
+} 
+// user struct
+type User struct {
+	ID        int    `pb:"1"`
+	FirstName string `pb:"2"`
+	LastName  string `pb:"3"`
+	Username  string `pb:"4"`
+	Email     string `pb:"5"`
+	Is_active bool   `pb:"6"`
+	Role      string `pb:"7"`
+}
+//edit status request
+type EditPatientStatusRequest struct {
+	ID        int    `pb:"1"`
+}
+//edit status response
+type EditPatientStatusResponse struct {
+	ID        int    `pb:"1"`
+	Is_active bool   `pb:"2"`
+}
+//update status request
+type UpdatePatientStatusRequest struct {
+	ID        int    `pb:"1"`
+	Is_active bool   `pb:"2"`
+}
+//update status response
+type UpdatePatientStatusResponse struct {
+	Is_active bool   `pb:"2"`
+}
+//user register
+type RegisterRequest struct {
+	FirstName string `pb:"1"`
+	LastName  string `pb:"2"`
+	Username  string `pb:"3"`
+	Email     string `pb:"4"`
+	Password  string `pb:"5"`
+}
+
+//user register response
+type RegisterResponse struct {
+	User User `pb:"1"`
+}
+//user edit request
+type UserEditRequest struct {
+	id int `pb:"1"`
+}
+//user edit response
+type UserEditResponse struct {
+	User User `pb:"1"`
+}
+//user update request
+type UserUpdateRequest struct {
+	ID int `pb:"1"`
+	FirstName string `pb:"2"`
+	LastName  string `pb:"3"`
+	Email     string `pb:"4"`
+	Is_active bool   `pb:"5"`
+}
+//user update response
+type UserUpdateResponse struct {
+	User User `pb:"1"`
+}
+
+//user delete request
+type UserDeleteRequest struct {
+	id int `pb:"1"`
+}
+//user delete response
+type UserDeleteResponse struct {
+	
+}
+//list user request
+type UserlistRequest struct {
+	SearchTerm string `pb:"1"`
+}
+// list user response
+type UserListResponse struct {
+	Users []User  `pb:"1"`
+}
+// register apponitment request
+type RegisterAppointmentRequest struct {
+	UserID          int  `pb:"1"`
+	DoctorDetailsID int  `pb:"2"`
+	ScheduleID      int  `pb:"3"`
+}
+// register apponitment response
+type RegisterAppointmentResponse struct {
+	Appointment Appointment `pb:"1"`
+}
